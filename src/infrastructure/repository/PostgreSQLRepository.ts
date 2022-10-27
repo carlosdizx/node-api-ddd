@@ -1,12 +1,12 @@
-import { MysqlDataSource } from "../../application/db/MySQLConfig";
+import { PostgresSQLDataSource } from "../../application/db/PostgreSQLConfig";
 import { CrudOperations } from "./common/CrudOperations";
 import { Repository } from "typeorm/repository/Repository";
 
-export class MySQLRepository implements CrudOperations<string> {
+export class PostgresSQLRepository implements CrudOperations<string> {
   private readonly repository: Repository<any>;
 
   constructor(entity: any) {
-    this.repository = MysqlDataSource.getRepository(entity);
+    this.repository = PostgresSQLDataSource.getRepository(entity);
   }
 
   async save(entity: any): Promise<any> {

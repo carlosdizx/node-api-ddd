@@ -5,6 +5,7 @@ import dbMongoInit from "./db/MongoConfig";
 import * as http from "http";
 import { registerRouters } from "./routes";
 import dbMySQLInit from "./db/MySQLConfig";
+import dbPostgresSQLInit from "./db/PostgreSQLConfig";
 
 export class Server {
   private readonly port: string;
@@ -21,8 +22,9 @@ export class Server {
   }
 
   connectToDatabase = async () => {
-    await dbMongoInit(); //connection to MongoDB
-    await dbMySQLInit(); //connection to MySQL
+    await dbMongoInit();
+    await dbMySQLInit();
+    await dbPostgresSQLInit()
   };
 
   listen = async (): Promise<void> => {
