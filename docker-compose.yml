@@ -1,4 +1,4 @@
-version: '3.5'
+version: "3.5"
 
 services:
   mongo:
@@ -22,6 +22,17 @@ services:
       - ME_CONFIG_MONGODB_SERVER:mongo
     ports:
       - "8081:8081"
+  rabbitmq:
+    image: "rabbitmq:3.6-management-alpine"
+    volumes:
+      - ./rabbit-db:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      AMQP_URL: "amqp://rabbitmq?connection_attempts=5&retry_delay=5"
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
 networks:
   default:
     name: mongodb_network
