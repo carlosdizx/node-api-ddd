@@ -1,14 +1,14 @@
 {
-  "name": "node-api-ddd",
+  "name": "api-ddd",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicación orientada al negocio, arquitectura por capas",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/application/App.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Carlos Ernesto Díaz Basante",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
@@ -37,5 +37,13 @@
     "@types/node": "^18.11.7",
     "@types/uuid": "^8.3.4",
     "jest": "^28.1.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosdizx/node-api-ddd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/carlosdizx/node-api-ddd/issues"
+  },
+  "homepage": "https://github.com/carlosdizx/node-api-ddd#readme"
 }
