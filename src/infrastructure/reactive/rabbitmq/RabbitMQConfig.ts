@@ -1,5 +1,4 @@
 import amqplib from "amqplib";
-const uri: string = process.env.RABBIT_MQ;
 
 const rabbitSettings = {
   protocol: "amqp",
@@ -13,24 +12,25 @@ const rabbitSettings = {
 
 export class RabbitMQConfig {
   private connect: any;
-  private queue: string;
+  private channel: any;
+  private queue: any;
 
   constructor(queue: string) {
-    this.initRabitt(queue).then();
+    this.intiRabbit(queue).then();
   }
 
-  private initRabitt = async (queue: string) => {
-    this.connect = await this.createConnection();
-    this.queue = await this.createQueue(queue);
-  };
-
-  private createConnection = async () => {
+  private intiRabbit = async (queue: string) => {
     console.log("Connecting to RabbitMQ");
-    return await amqplib.connect(rabbitSettings);
+    this.connect = await this.createConnection();
+    this.channel = await this.createChannel();
+    this.queue = await this.createQueue(queue);
+    console.log("Connected to RabbitMQ");
   };
 
-  private createQueue = async (queue: string) => {
-    const channel = await this.connect.createChannel();
-    return await channel.assertQueue(queue);
-  };
+  private createConnection = async () => await amqplib.connect(rabbitSettings);
+
+  private createChannel = async () => await this.connect.createChannel();
+
+  private createQueue = async (queue: string) =>
+    await this.channel.assertQueue(queue);
 }
