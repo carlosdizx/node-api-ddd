@@ -2,7 +2,7 @@ import { RabbitMQConfig } from "./RabbitMQConfig";
 
 const initRabbitMQ = async () => {
   const queues: RabbitMQConfig[] = [];
-  queues.push(await new RabbitMQConfig("xd"));
+  queues.push(await new RabbitMQConfig("users"));
   return queues;
 };
 
