@@ -1,40 +1,24 @@
-import amqplib from "amqplib/callback_api";
+import amqplib from "amqplib";
 
-const rabbitmq: string = process.env.RABBIT_MQ;
+const uri: string = process.env.RABBIT_MQ;
+
+const rabbitSettings = {
+  protocol: "amqp",
+  hostname: "localhost",
+  port: 5672,
+  username: "superadmin",
+  password: "rH9b79tdVfekR5T",
+  vhost: "/",
+  authMechanism: ["PLAIN", "AMQPLAIN", "EXTERNAL"],
+};
 
 export class RabbitMQConfig {
   private readonly queue: string;
 
   constructor(queue: string) {
     this.queue = queue;
+    console.log("Connecting to RabbitMQ with queue: ".concat(this.queue));
+    amqplib.connect(rabbitSettings);
+    console.log("Connected to RabbitMQ with queue: ".concat(this.queue));
   }
-
-  connect = () => {
-    amqplib.connect(rabbitmq, (err, conn) => {
-      if (err) throw err;
-
-      conn.createChannel((err, ch2) => {
-        if (err) throw err;
-
-        ch2.assertQueue(this.queue);
-        ch2.consume(this.queue, (msg) => {
-          if (msg !== null) {
-            console.log(msg.content.toString());
-            ch2.ack(msg);
-          } else {
-            console.log("Consumer cancelled by server");
-          }
-        });
-      });
-
-      conn.createChannel((err, ch1) => {
-        if (err) throw err;
-        ch1.assertQueue(this.queue);
-
-        setInterval(() => {
-          ch1.sendToQueue(this.queue, Buffer.from("something to do"));
-        }, 1000);
-      });
-    });
-  };
 }

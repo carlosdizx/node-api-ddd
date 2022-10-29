@@ -6,6 +6,7 @@ import { registerRouters } from "./routes";
 import dbMySQLInit from "./db/MySQLConfig";
 import dbPostgresSQLInit from "./db/PostgreSQLConfig";
 import initScheduler from "../infrastructure/scheduler";
+import initRabbitMQ from "../infrastructure/reactive/rabbitmq";
 
 export class Server {
   private readonly port: string;
@@ -19,6 +20,7 @@ export class Server {
     this.connectToDatabase().then();
     registerRouters(this.app);
     initScheduler().then();
+    initRabbitMQ().then();
   }
 
   connectToDatabase = async () => {
