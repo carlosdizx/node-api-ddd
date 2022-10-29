@@ -14,8 +14,10 @@ export class RabbitMQConfig {
   private connect: any;
   private channel: any;
   private queue: any;
+  private readonly queueName: string;
 
   constructor(queue: string) {
+    this.queueName = queue;
     this.intiRabbit(queue).then();
   }
 
@@ -25,6 +27,8 @@ export class RabbitMQConfig {
     this.channel = await this.createChannel();
     this.queue = await this.createQueue(queue);
     console.log("Connected to RabbitMQ");
+
+    await this.sendMessageToQueue({ id: 1, name: "xdxdxd" });
   };
 
   private createConnection = async () => await amqplib.connect(rabbitSettings);
@@ -33,4 +37,11 @@ export class RabbitMQConfig {
 
   private createQueue = async (queue: string) =>
     await this.channel.assertQueue(queue);
+
+  public sendMessageToQueue = async (message: any) => {
+    await this.channel.sendToQueue(
+      this.queueName,
+      Buffer.from(JSON.stringify(message))
+    );
+  };
 }
