@@ -1,10 +1,9 @@
-import { RabbitMQConfig } from "./RabbitMQConfig";
+import { UserRabbitMQ } from "./user/UserRabbitMQ";
 
 const initRabbitMQ = async () => {
-  const queues: RabbitMQConfig[] = [];
+  const queues: any[] = [];
 
-  const queueUsers = await new RabbitMQConfig("users");
-  queues.push(queueUsers);
+  queues.push(new UserRabbitMQ());
 
   return queues;
 };

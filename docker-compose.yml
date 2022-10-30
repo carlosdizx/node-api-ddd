@@ -29,6 +29,7 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    restart: always
     environment:
       AMQP_URL: "amqp://rabbitmq?connection_attempts=5&retry_delay=5"
       RABBITMQ_DEFAULT_USER: "guest"
