@@ -11,11 +11,11 @@ const rabbitSettings = {
 };
 
 export class RabbitMQConfig {
-  private channel: any;
+  private _channel: any;
 
   async createChannel() {
     const connection = await amqp.connect(rabbitSettings);
-    this.channel = await connection.createChannel();
+    this._channel = await connection.createChannel();
   }
 
   publishMessage = async (
@@ -24,29 +24,20 @@ export class RabbitMQConfig {
     routingKey: string,
     message: any
   ) => {
-    if (!this.channel) {
+    if (!this._channel) {
       await this.createChannel();
     }
 
-    await this.channel.assertExchange(exchange, type);
+    await this._channel.assertExchange(exchange, type);
 
-    await this.channel.publish(
+    await this._channel.publish(
       exchange,
       routingKey,
       Buffer.from(JSON.stringify(message))
     );
   };
 
-  listenerMessages = async (queue: string) => {
-    if (!this.channel) {
-      await this.createChannel();
-    }
-
-    let data = "hola";
-    await this.channel.consume(queue, (message) => {
-      data = JSON.parse(JSON.stringify(message.content.toString()));
-      this.channel.ack(message);
-    });
-    return data;
-  };
+  get channel(): any {
+    return this._channel;
+  }
 }
