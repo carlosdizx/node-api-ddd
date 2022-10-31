@@ -7,14 +7,6 @@ export class App {
     this.server = new Server(port);
     return this.server.listen();
   }
-
-  get httpServer() {
-    return this.server?.httpServer;
-  }
-
-  async stop() {
-    return this.server?.stop();
-  }
 }
 
 try {
