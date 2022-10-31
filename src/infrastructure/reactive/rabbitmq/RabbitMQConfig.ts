@@ -42,10 +42,9 @@ export class RabbitMQConfig {
       await this.createChannel();
     }
 
-    let data;
-    this.channel.consume(queue, (message) => {
+    let data = "hola";
+    await this.channel.consume(queue, (message) => {
       data = JSON.parse(JSON.stringify(message.content.toString()));
-      console.log(data , "<============")
       this.channel.ack(message);
     });
     return data;

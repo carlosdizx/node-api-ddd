@@ -6,7 +6,7 @@ import { registerRouters } from "./routes";
 import dbMySQLInit from "./db/MySQLConfig";
 import dbPostgresSQLInit from "./db/PostgreSQLConfig";
 import initScheduler from "../infrastructure/scheduler";
-import { RabbitMQConfig } from "../infrastructure/reactive/rabbitmq/RabbitMQConfig";
+import initAMQP from "../infrastructure/reactive/rabbitmq";
 
 export class Server {
   private readonly port: string;
@@ -20,16 +20,7 @@ export class Server {
     this.connectToDatabase().then();
     registerRouters(this.app);
     initScheduler().then();
-    const config: RabbitMQConfig = new RabbitMQConfig();
-    /*
-   config
-      .publishMessage("ex.ddd.finaktiva", "direct", "rk.users.send", {
-        id: 1,
-        name: "carlos",
-      })
-      .then();
-    */
-    config.listenerMessages("users.send").then((r) => console.log(r));
+    initAMQP().then();
   }
 
   connectToDatabase = async () => {
