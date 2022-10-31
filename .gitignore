@@ -3,5 +3,6 @@ dist
 /package-lock.json
 .idea/
 /db-volume/
+/rabbit-db/
 db-volume/*
 .env

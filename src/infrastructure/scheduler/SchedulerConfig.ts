@@ -5,9 +5,9 @@ export class SchedulerConfig {
 
   private readonly _lamda: Function;
 
-  constructor(expression: string, lamda: Function) {
+  constructor(expression: string, lambda: Function) {
     this._expression = expression;
-    this._lamda = lamda;
+    this._lamda = lambda;
   }
 
   start = async () => {
