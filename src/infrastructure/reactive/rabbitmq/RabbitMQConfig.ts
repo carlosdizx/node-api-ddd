@@ -18,27 +18,36 @@ export class RabbitMQConfig {
     this.channel = await connection.createChannel();
   }
 
-  async publishMessage(
+  publishMessage = async (
     exchange: string,
     type: string,
     routingKey: string,
     message: any
-  ) {
+  ) => {
     if (!this.channel) {
       await this.createChannel();
     }
 
     await this.channel.assertExchange(exchange, type);
 
-    const logDetails = {
-      logType: routingKey,
-      message: message,
-      dateTime: new Date(),
-    };
     await this.channel.publish(
       exchange,
       routingKey,
-      Buffer.from(JSON.stringify(logDetails))
+      Buffer.from(JSON.stringify(message))
     );
-  }
+  };
+
+  listenerMessages = async (queue: string) => {
+    if (!this.channel) {
+      await this.createChannel();
+    }
+
+    let data;
+    this.channel.consume(queue, (message) => {
+      data = JSON.parse(JSON.stringify(message.content.toString()));
+      console.log(data , "<============")
+      this.channel.ack(message);
+    });
+    return data;
+  };
 }

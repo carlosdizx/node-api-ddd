@@ -21,13 +21,15 @@ export class Server {
     registerRouters(this.app);
     initScheduler().then();
     const config: RabbitMQConfig = new RabbitMQConfig();
-    config.createChannel().then();
-    config
+    /*
+   config
       .publishMessage("ex.ddd.finaktiva", "direct", "rk.users.send", {
         id: 1,
         name: "carlos",
       })
       .then();
+    */
+    config.listenerMessages("users.send").then((r) => console.log(r));
   }
 
   connectToDatabase = async () => {
