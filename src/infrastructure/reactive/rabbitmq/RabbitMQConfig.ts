@@ -2,11 +2,11 @@ import amqp from "amqplib";
 
 const rabbitSettings = {
   protocol: "amqp",
-  hostname: "localhost",
-  port: 5672,
-  username: "superadmin",
-  password: "rH9b79tdVfekR5T",
-  vhost: "/",
+  hostname: process.env.BROKER_RABBIT_HOSTBROKER_RABBIT_HOST,
+  port: parseInt(process.env.BROKER_RABBIT_PORT),
+  username: process.env.BROKER_RABBIT_USERNAME,
+  password: process.env.BROKER_RABBIT_PASSWORD,
+  vhost: process.env.BROKER_RABBIT_VHOST,
   authMechanism: ["PLAIN", "AMQPLAIN", "EXTERNAL"],
 };
 

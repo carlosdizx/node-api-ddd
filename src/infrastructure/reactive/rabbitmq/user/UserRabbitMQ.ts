@@ -24,6 +24,10 @@ const registerUser = async () => {
     const data = JSON.parse(
       JSON.parse(JSON.stringify(message.content.toString()))
     );
+    const users = await crudUseCase.getAllUsers();
+
+    if (users.find((user) => user.email === data.email))
+      throw new Error("User already exist!");
     await crudUseCase.registerUser(data);
     userConfig.channel.ack(message);
 
