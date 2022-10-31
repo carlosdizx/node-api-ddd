@@ -10,53 +10,31 @@ const rabbitSettings = {
   authMechanism: ["PLAIN", "AMQPLAIN", "EXTERNAL"],
 };
 
-export class RabbitMQConfig {
-  private connect: any;
-  private _channel: any;
-  private queue: any;
-  private readonly _queueName: string;
+const rabbitMQInit = async (queueListener: string, queueSender: string) => {
+  const conn = await amqplib.connect(rabbitSettings);
 
-  constructor(queue: string) {
-    this._queueName = queue;
-    this.intiRabbit(queue).then();
-  }
+  const ch1 = await conn.createChannel();
+  await ch1.assertQueue(queueListener);
 
-  private intiRabbit = async (queue: string) => {
-    console.log("Connecting to RabbitMQ");
-    this.connect = await this.createConnection();
-    this._channel = await this.createChannel();
-    this.queue = await this.createQueue(queue);
-    console.log("Connected to RabbitMQ");
-  };
+  ch1.consume(queueListener, (msg) => {
+    if (msg !== null) {
+      console.log(
+        "Recieved:",
+        JSON.parse(JSON.stringify(msg.content.toString()))
+      );
+      ch1.ack(msg);
+    } else {
+      console.log("Consumer cancelled by server");
+    }
+  });
 
-  private createConnection = async () => await amqplib.connect(rabbitSettings);
+  const ch2 = await conn.createChannel();
+  await ch2.assertQueue(queueSender);
 
-  private createChannel = async () => await this.connect.createChannel();
+  ch2.sendToQueue(
+    queueSender,
+    Buffer.from(JSON.stringify({ id: 1, name: "carlos" }))
+  );
+};
 
-  private createQueue = async (queue: string) =>
-    await this._channel.assertQueue(queue);
-
-  public sendMessageToQueue = async (message: any) =>
-    await this._channel.sendToQueue(
-      this._queueName,
-      Buffer.from(JSON.stringify(message))
-    );
-
-  public receiveMessageToQueue = async () => {
-    let data;
-    await this._channel.consume(this._queueName, (message) => {
-      data = JSON.parse(JSON.stringify(message.content.toString()));
-      this._channel.ack(message);
-      return data;
-    });
-    return data;
-  };
-
-  get channel(): any {
-    return this._channel;
-  }
-
-  get queueName(): string {
-    return this._queueName;
-  }
-}
+export default rabbitMQInit;
