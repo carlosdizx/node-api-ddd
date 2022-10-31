@@ -1,4 +1,4 @@
-import amqplib from "amqplib";
+import amqp from "amqplib";
 
 const rabbitSettings = {
   protocol: "amqp",
@@ -10,31 +10,35 @@ const rabbitSettings = {
   authMechanism: ["PLAIN", "AMQPLAIN", "EXTERNAL"],
 };
 
-const rabbitMQInit = async (queueListener: string, queueSender: string) => {
-  const conn = await amqplib.connect(rabbitSettings);
+export class RabbitMQConfig {
+  private channel: any;
 
-  const ch1 = await conn.createChannel();
-  await ch1.assertQueue(queueListener);
+  async createChannel() {
+    const connection = await amqp.connect(rabbitSettings);
+    this.channel = await connection.createChannel();
+  }
 
-  ch1.consume(queueListener, (msg) => {
-    if (msg !== null) {
-      console.log(
-        "Recieved:",
-        JSON.parse(JSON.stringify(msg.content.toString()))
-      );
-      ch1.ack(msg);
-    } else {
-      console.log("Consumer cancelled by server");
+  async publishMessage(
+    exchange: string,
+    type: string,
+    routingKey: string,
+    message: any
+  ) {
+    if (!this.channel) {
+      await this.createChannel();
     }
-  });
 
-  const ch2 = await conn.createChannel();
-  await ch2.assertQueue(queueSender);
+    await this.channel.assertExchange(exchange, type);
 
-  ch2.sendToQueue(
-    queueSender,
-    Buffer.from(JSON.stringify({ id: 1, name: "carlos" }))
-  );
-};
-
-export default rabbitMQInit;
+    const logDetails = {
+      logType: routingKey,
+      message: message,
+      dateTime: new Date(),
+    };
+    await this.channel.publish(
+      exchange,
+      routingKey,
+      Buffer.from(JSON.stringify(logDetails))
+    );
+  }
+}
