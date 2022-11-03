@@ -1,35 +1,33 @@
+import { MongoDataSource } from "../../application/db/MongoConfig";
 import { CrudOperations } from "./common/CrudOperations";
-import { model, Model, Schema } from "mongoose";
+import { Repository } from "typeorm/repository/Repository";
 
 export class MongoRepository implements CrudOperations<string> {
-  private readonly modelData: Model<any>;
+  private readonly repository: Repository<any>;
 
-  constructor(definition: any, collection: string) {
-    const schema = new Schema(definition, {
-      timestamps: true,
-    });
-    this.modelData = model(collection, schema);
+  constructor(entity: any) {
+    this.repository = MongoDataSource.getRepository(entity);
   }
 
   async save(entity: any): Promise<any> {
-    return this.modelData.create(entity);
+    return await this.repository.save(entity);
   }
 
   async list(): Promise<any> {
-    return this.modelData.find();
+    return await this.repository.find();
   }
 
   async findById(uuid: string): Promise<any> {
-    return this.modelData.findOne({ uuid });
+    return await this.repository.findOneBy({ uuid });
   }
 
   async update(entity: any, uuid: string): Promise<any> {
-    return this.modelData.findOneAndUpdate({ uuid }, entity, { new: true });
+    const entityFound = this.repository.findOneBy({ uuid });
+    const entitySaved = Object.assign(entityFound, entity);
+    return await this.repository.save(entitySaved);
   }
 
   async delete(uuid: string): Promise<void> {
-    console.log(uuid);
-    const entityFound = await this.findById(uuid);
-    entityFound.delete();
+    await this.repository.delete({ uuid });
   }
 }

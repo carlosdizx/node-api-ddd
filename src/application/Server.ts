@@ -3,11 +3,10 @@ import express from "express";
 import cors from "express";
 import dbMongoInit from "./db/MongoConfig";
 import { registerRouters } from "./routes";
-import dbMySQLInit from "./db/MySQLConfig";
-import dbPostgresSQLInit from "./db/PostgreSQLConfig";
+//import dbMySQLInit from "./db/MySQLConfig";
+//import dbPostgresSQLInit from "./db/PostgreSQLConfig";
 import initScheduler from "../infrastructure/scheduler";
 import initAMQP from "../infrastructure/reactive/rabbitmq";
-import allAxiosInit from "../infrastructure/http/axios";
 
 export class Server {
   private readonly port: string;
@@ -22,13 +21,12 @@ export class Server {
     registerRouters(this.app);
     initScheduler().then();
     initAMQP().then();
-    allAxiosInit().then();
   }
 
   connectToDatabase = async () => {
     await dbMongoInit();
-    await dbMySQLInit();
-    await dbPostgresSQLInit();
+    //await dbMySQLInit();
+    //await dbPostgresSQLInit();
   };
 
   listen = async (): Promise<void> => {

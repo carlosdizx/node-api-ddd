@@ -1,15 +1,21 @@
-import { connect } from "mongoose";
+import { DataSource } from "typeorm";
+import { UserEntity } from "../../infrastructure/data/UserEntity";
 
-const DB_URI = `${process.env.DB_MONGO_URI}`;
+export const MongoDataSource = new DataSource({
+  type: "mongodb",
+  host: "localhost",
+  port: 27017,
+  database: "prueba",
+  entities: [UserEntity],
+});
 
 const dbMongoInit = async () => {
   try {
     console.log("Connecting to MongoDB");
-    await connect(DB_URI);
+    await MongoDataSource.initialize();
     console.log("Connected to MongoDB");
   } catch (e) {
-    console.log("error:", e);
-    console.log("Failed trying to connect to  MongoDB");
+    console.error("Error during Data Source initialization", e);
   }
 };
 
