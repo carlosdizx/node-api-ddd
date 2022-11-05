@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { UserData } from "../../infrastructure/data/UserEntity";
+import { UserData } from "../../infrastructure/data/UserData";
 
 export const MongoDataSource = new DataSource({
   type: "mongodb",
