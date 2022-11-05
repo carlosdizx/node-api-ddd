@@ -1,11 +1,11 @@
 import {v4 as uuid} from "uuid";
 
 export class User {
-    uuid: string;
-    name: string;
-    email: string;
-    password: string;
-    description: string;
+    private readonly uuid: string;
+    private readonly name: string;
+    private readonly email: string;
+    private readonly password: string;
+    private readonly description: string;
 
     constructor(name: string, email: string, password: string, description?: string) {
         this.uuid = uuid();

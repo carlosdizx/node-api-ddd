@@ -11,9 +11,5 @@ const useCaseMongo = new UserCrudUseCase(repositoryMongo);
 const controllerMongo = new UserController(useCaseMongo);
 
 UserRoute.post("/", controllerMongo.registerUser);
-UserRoute.get("/", controllerMongo.getDetailUSer);
-UserRoute.get("/all", controllerMongo.getAllUsers);
-UserRoute.put("/", controllerMongo.updateUser);
-UserRoute.delete("/", controllerMongo.deleteUser);
 
 export default UserRoute;
