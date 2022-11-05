@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "express";
 import dbMongoInit from "./db/MongoConfig";
-import { initRoutes } from "./routes";
+import { initRoutes } from "../infrastructure/routes";
 import initScheduler from "../infrastructure/scheduler";
 import initAMQP from "../infrastructure/reactive/rabbitmq";
 

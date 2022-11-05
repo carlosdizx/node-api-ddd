@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { UserCrudUseCase } from "../../domain/usecase/user/UserCrudUseCase";
-import { UserController } from "../../infrastructure/controller/user/UserController";
-import { MongoRepository } from "../../infrastructure/repository/MongoRepository";
-import { MySQLRepository } from "../../infrastructure/repository/MySQLRepository";
-import { UserEntity } from "../../infrastructure/data/UserEntity";
-import {PostgresSQLRepository} from "../../infrastructure/repository/PostgreSQLRepository";
+import { UserController } from "../controller/user/UserController";
+import { MongoRepository } from "../repository/MongoRepository";
+import { MySQLRepository } from "../repository/MySQLRepository";
+import { UserEntity } from "../data/UserEntity";
+import {PostgresSQLRepository} from "../repository/PostgreSQLRepository";
 
 const UserRoute = Router();
 
