@@ -4,8 +4,8 @@ import { User } from "../../models/user/User";
 export class UserCrudUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  public registerUser = async ({ name, email, description }) => {
-    const user = new User(name, email, description);
+  public registerUser = async ({ name, email,password, description }) => {
+    const user = new User(name, email,password, description);
     return await this.userRepository.save(user);
   };
 
