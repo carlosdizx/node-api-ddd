@@ -3,9 +3,9 @@ import { UserEntity } from "../../infrastructure/data/UserEntity";
 
 export const MongoDataSource = new DataSource({
   type: "mongodb",
-  host: "localhost",
-  port: 27017,
-  database: "prueba",
+  host: process.env.DB_MONGO_HOST,
+  port: parseInt(process.env.DB_MONGO_PORT),
+  database: process.env.DB_MONGO_DATABASE,
   entities: [UserEntity],
 });
 
