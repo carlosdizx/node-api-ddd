@@ -1,12 +1,12 @@
 import { DataSource } from "typeorm";
-import { UserEntity } from "../../infrastructure/data/UserEntity";
+import { UserData } from "../../infrastructure/data/UserEntity";
 
 export const MongoDataSource = new DataSource({
   type: "mongodb",
   host: process.env.DB_MONGO_HOST,
   port: parseInt(process.env.DB_MONGO_PORT),
   database: process.env.DB_MONGO_DATABASE,
-  entities: [UserEntity],
+  entities: [UserData],
 });
 
 const dbMongoInit = async () => {
