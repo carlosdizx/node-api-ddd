@@ -11,7 +11,7 @@ export class PersonDataAdapter
   }
 
   async findAll(): Promise<any[]> {
-    const result = await this.dataSource()
+    return await this.dataSource()
       .getRepository(PersonData)
       .find({
         join: {
@@ -21,7 +21,5 @@ export class PersonDataAdapter
           },
         },
       });
-    console.log(result);
-    return result;
   }
 }
