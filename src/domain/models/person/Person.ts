@@ -1,9 +1,7 @@
 import { TypesDocument } from "../common/TypesDocument";
 import { User } from "../user/User";
-import { v4 as uuid } from "uuid";
 
 export class Person {
-  private uuid: string;
   private readonly firstName: string;
   private readonly lastName: string;
   private readonly typeDocument: TypesDocument;
@@ -19,7 +17,6 @@ export class Person {
     dateOfBirth: Date,
     user: User
   ) {
-    this.uuid = uuid();
     this.firstName = firstName;
     this.lastName = lastName;
     this.typeDocument = typeDocument;
