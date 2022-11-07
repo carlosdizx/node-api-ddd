@@ -1,12 +1,12 @@
 import { PersonRepository } from "../../models/person/PersonRepository";
 import { Person } from "../../models/person/Person";
-import { UserAuthRepository } from "../../models/user/UserRepository";
+import { UserRepository } from "../../models/user/UserRepository";
 import { User } from "../../models/user/User";
 
 export class PersonUseCase {
   constructor(
     private readonly mainRepository: PersonRepository,
-    private readonly twoRepository: UserAuthRepository
+    private readonly twoRepository: UserRepository
   ) {}
 
   public createPerson = async ({

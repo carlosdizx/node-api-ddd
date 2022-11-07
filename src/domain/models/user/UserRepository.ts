@@ -1,5 +1,5 @@
 import { User } from "./User";
 
-export interface UserAuthRepository {
+export interface UserRepository {
   findByUuid(uuid: string): Promise<User>;
 }
