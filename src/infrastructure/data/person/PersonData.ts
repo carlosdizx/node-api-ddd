@@ -1,6 +1,5 @@
-import { Entity, Column, ObjectIdColumn, ManyToOne } from "typeorm";
+import { Entity, Column, ObjectIdColumn, ManyToOne, JoinColumn } from "typeorm";
 import { TypesDocument } from "../../../domain/models/common/TypesDocument";
-import { JoinColumn } from "typeorm/browser";
 import { UserData } from "../user/UserData";
 
 @Entity({ name: "users" })
