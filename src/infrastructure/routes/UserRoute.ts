@@ -11,6 +11,6 @@ const useCase = new UserUseCase(adapter);
 const controller = new UserController(useCase);
 
 
-UserRoute.get("/findUser/", controller.findUserByUuid);
+UserRoute.get("/find-user/", controller.findUserByUuid);
 
 export default UserRoute;
