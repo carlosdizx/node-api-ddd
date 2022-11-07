@@ -13,4 +13,9 @@ export class PersonController {
     const person = await this.useCase.createPerson(data);
     res.send(person);
   };
+
+  public listAll = async (req: Request, res: Response) => {
+    const list: any[] = await this.useCase.findAll();
+    res.send(list);
+  };
 }

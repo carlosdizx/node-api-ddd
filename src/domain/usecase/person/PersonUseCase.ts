@@ -28,4 +28,8 @@ export class PersonUseCase {
     );
     return await this.mainRepository.create(person);
   };
+
+  public findAll = async () => {
+    return this.mainRepository.findAll();
+  };
 }

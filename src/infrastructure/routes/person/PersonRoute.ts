@@ -14,5 +14,6 @@ const useCase = new PersonUseCase(personAdapter, userAdapter);
 const controller = new PersonController(useCase);
 
 personRoute.post("/", controller.createPerson);
+personRoute.get("/all", controller.listAll);
 
 export default personRoute;
