@@ -2,7 +2,7 @@ import {UserRepository} from "../../models/user/UserRepository";
 import {User} from "../../models/user/User";
 import bcrypt from "bcryptjs";
 
-export class UserCrudUseCase {
+export class UserAuthUseCase {
     constructor(private readonly userRepository: UserRepository) {
     }
 

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { UserCrudUseCase } from "../../../domain/usecase/user/UserCrudUseCase";
+import { UserAuthUseCase } from "../../../domain/usecase/user/UserCrudUseCase";
 
 export class UserController {
-  constructor(private userUseCase: UserCrudUseCase) {
+  constructor(private userUseCase: UserAuthUseCase) {
     this.registerUser = this.registerUser.bind(this);
   }
 
