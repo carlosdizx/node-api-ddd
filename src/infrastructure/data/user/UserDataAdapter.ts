@@ -1,7 +1,10 @@
-import { MongoRepository } from "../../repository/MongoRepository";
 import { UserRepository } from "../../../domain/models/user/UserRepository";
+import { PostgresSQLRepository } from "../../repository/PostgreSQLRepository";
 
-export class UserDataAdapter extends MongoRepository implements UserRepository {
+export class UserDataAdapter
+  extends PostgresSQLRepository
+  implements UserRepository
+{
   constructor(entity: any) {
     super(entity);
   }

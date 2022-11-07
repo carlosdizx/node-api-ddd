@@ -1,11 +1,8 @@
-import { Entity, Column, ObjectIdColumn, OneToMany } from "typeorm";
+import { Entity, Column, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { PersonData } from "../person/PersonData";
 @Entity({ name: "users" })
 export class UserData {
-  @ObjectIdColumn()
-  id: number;
-
-  @Column()
+  @PrimaryGeneratedColumn("uuid")
   uuid: string;
   @Column()
   name: string;

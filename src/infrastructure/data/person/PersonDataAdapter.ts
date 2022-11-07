@@ -1,9 +1,9 @@
-import { MongoRepository } from "../../repository/MongoRepository";
+import { PostgresSQLRepository } from "../../repository/PostgreSQLRepository";
 import { PersonRepository } from "../../../domain/models/person/PersonRepository";
 import { PersonData } from "./PersonData";
 
 export class PersonDataAdapter
-  extends MongoRepository
+  extends PostgresSQLRepository
   implements PersonRepository
 {
   create(person: any): Promise<any> {
@@ -11,15 +11,10 @@ export class PersonDataAdapter
   }
 
   async findAll(): Promise<any[]> {
-    return await this.dataSource()
+    return this.dataSource()
       .getRepository(PersonData)
-      .find({
-        join: {
-          alias: "person",
-          innerJoinAndSelect: {
-            user: "person.user",
-          },
-        },
-      });
+      .createQueryBuilder("person")
+      .leftJoinAndSelect("person.user", "user")
+      .getMany();
   }
 }

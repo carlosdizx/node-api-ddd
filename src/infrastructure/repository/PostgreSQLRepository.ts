@@ -1,6 +1,7 @@
 import { PostgresSQLDataSource } from "../../application/db/PostgreSQLConfig";
 import { CrudOperations } from "./common/CrudOperations";
 import { Repository } from "typeorm/repository/Repository";
+import { DataSource } from "typeorm";
 
 export class PostgresSQLRepository implements CrudOperations<string> {
   private readonly repository: Repository<any>;
@@ -29,5 +30,9 @@ export class PostgresSQLRepository implements CrudOperations<string> {
 
   async delete(uuid: string): Promise<void> {
     await this.repository.delete({ uuid });
+  }
+
+  dataSource(): DataSource {
+    return PostgresSQLDataSource;
   }
 }
