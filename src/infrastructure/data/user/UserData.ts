@@ -10,8 +10,6 @@ import { PersonData } from "../person/PersonData";
 export class UserData {
   @BeforeInsert()
   @PrimaryGeneratedColumn("uuid")
-  id: string;
-  @Column()
   uuid: string;
   @Column()
   name: string;
