@@ -1,10 +1,11 @@
-import { Entity, Column, ObjectIdColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { TypesDocument } from "../../../domain/models/common/TypesDocument";
 import { UserData } from "../user/UserData";
 
 @Entity({ name: "persons" })
 export class PersonData {
-  @ObjectIdColumn()
+
+  @PrimaryGeneratedColumn()
   id: number;
   @Column()
   uuid: string;

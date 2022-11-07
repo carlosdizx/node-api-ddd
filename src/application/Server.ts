@@ -1,10 +1,10 @@
 import "dotenv/config";
 import express from "express";
 import cors from "express";
-import dbMongoInit from "./db/MongoConfig";
 import { initRoutes } from "../infrastructure/routes";
 import initScheduler from "../infrastructure/scheduler";
 import initAMQP from "../infrastructure/reactive/rabbitmq";
+import dbPostgresSQLInit from "./db/PostgreSQLConfig";
 
 export class Server {
   private readonly port: string;
@@ -22,7 +22,7 @@ export class Server {
   }
 
   connectToDatabase = async () => {
-    await dbMongoInit();
+    await dbPostgresSQLInit();
   };
 
   listen = async (): Promise<void> => {
