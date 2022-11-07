@@ -14,6 +14,8 @@ export class PersonData {
   lastName: string;
   @Column({
     type: "enum",
+    enum: TypesDocument,
+    default: TypesDocument.CitizenshipCard,
   })
   typeDocument: TypesDocument;
   @Column()
