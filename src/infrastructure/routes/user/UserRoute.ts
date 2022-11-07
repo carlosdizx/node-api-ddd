@@ -4,13 +4,13 @@ import { UserData } from "../../data/user/UserData";
 import {UserDataAdapter} from "../../data/user/UserDataAdapter";
 import {UserController} from "../../controller/user/UserController";
 
-const UserRoute = Router();
+const userRoute = Router();
 
 const adapter = new UserDataAdapter(UserData);
 const useCase = new UserUseCase(adapter);
 const controller = new UserController(useCase);
 
 
-UserRoute.get("/find-user/", controller.findUserByUuid);
+userRoute.get("/find-user/", controller.findUserByUuid);
 
-export default UserRoute;
+export default userRoute;

@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { PersonData } from "../../data/person/PersonData";
-import { PersonDataAdapter } from "../../data/person/PersonDataAdapter";
-import { PersonController } from "../../controller/person/PersonController";
 import { PersonUseCase } from "../../../domain/usecase/person/PersonUseCase";
-import { UserDataAdapter } from "../../data/user/UserDataAdapter";
+import { PersonData } from "../../data/person/PersonData";
 import { UserData } from "../../data/user/UserData";
+import { PersonDataAdapter } from "../../data/person/PersonDataAdapter";
+import { UserDataAdapter } from "../../data/user/UserDataAdapter";
+import { PersonController } from "../../controller/person/PersonController";
 
 const personRoute = Router();
 
@@ -14,5 +14,6 @@ const useCase = new PersonUseCase(personAdapter, userAdapter);
 const controller = new PersonController(useCase);
 
 personRoute.post("/", controller.createPerson);
+console.log(personRoute)
 
 export default personRoute;
