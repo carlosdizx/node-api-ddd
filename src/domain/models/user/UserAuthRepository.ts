@@ -1,5 +1,5 @@
 import { User } from "./User";
 
-export interface UserRepository {
+export interface UserAuthRepository {
   register(user: User): Promise<User>;
 }

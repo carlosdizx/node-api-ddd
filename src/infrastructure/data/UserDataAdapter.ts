@@ -1,7 +1,7 @@
 import { MongoRepository } from "../repository/MongoRepository";
-import { UserRepository } from "../../domain/models/user/UserRepository";
+import { UserAuthRepository } from "../../domain/models/user/UserAuthRepository";
 
-export class UserDataAdapter extends MongoRepository implements UserRepository {
+export class UserDataAdapter extends MongoRepository implements UserAuthRepository {
   constructor(entity: any) {
     super(entity);
   }
