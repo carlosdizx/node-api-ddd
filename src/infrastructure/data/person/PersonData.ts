@@ -2,7 +2,7 @@ import { Entity, Column, ObjectIdColumn, ManyToOne, JoinColumn } from "typeorm";
 import { TypesDocument } from "../../../domain/models/common/TypesDocument";
 import { UserData } from "../user/UserData";
 
-@Entity({ name: "users" })
+@Entity({ name: "persons" })
 export class PersonData {
   @ObjectIdColumn()
   id: number;

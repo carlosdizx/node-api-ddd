@@ -2,7 +2,9 @@ import { PersonUseCase } from "../../../domain/usecase/person/PersonUseCase";
 import { Request, Response } from "express";
 
 export class PersonController {
-  constructor(private readonly useCase: PersonUseCase) {}
+  constructor(private readonly useCase: PersonUseCase) {
+    this.createPerson = this.createPerson.bind(this);
+  }
 
   public createPerson = async ({ query, body }: Request, res: Response) => {
     const { uuid } = query;
