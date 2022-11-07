@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UserAuthUseCase } from "../../domain/usecase/user/UserCrudUseCase";
+import { UserAuthUseCase } from "../../domain/usecase/user/UserAuthUseCase";
 import { UserData } from "../data/UserData";
 import {UserDataAdapter} from "../data/UserDataAdapter";
 import {UserController} from "../controller/user/UserController";
