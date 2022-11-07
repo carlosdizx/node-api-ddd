@@ -5,10 +5,10 @@ import bcrypt from "bcryptjs";
 export class UserAuthUseCase {
   constructor(private readonly repository: UserAuthRepository) {}
 
-  public registerUser = async ({ name, email, password, description }) => {
+  public registerUser = async ({ email, password, description }) => {
     const salt = await bcrypt.genSalt(10);
     const pass = await bcrypt.hash(password, salt);
-    const user = new User(name, email, pass, description);
+    const user = new User(email, pass, description);
     return await this.repository.register(user);
   };
 }
