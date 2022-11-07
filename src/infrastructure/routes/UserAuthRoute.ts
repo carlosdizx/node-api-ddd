@@ -1,16 +1,16 @@
 import { Router } from "express";
-import { UserUseCase } from "../../domain/usecase/user/UserUseCase";
+import { UserAuthUseCase } from "../../domain/usecase/user/UserAuthUseCase";
 import { UserData } from "../data/user/UserData";
-import {UserDataAdapter} from "../data/user/UserDataAdapter";
-import {UserController} from "../controller/user/UserController";
+import {UserDataAuthAdapter} from "../data/user/UserDataAuthAdapter";
+import {UserAuthController} from "../controller/user/UserAuthController";
 
-const UserRoute = Router();
+const UserAuthRoute = Router();
 
-const adapter = new UserDataAdapter(UserData);
-const useCase = new UserUseCase(adapter);
-const controller = new UserController(useCase);
+const adapter = new UserDataAuthAdapter(UserData);
+const useCase = new UserAuthUseCase(adapter);
+const controller = new UserAuthController(useCase);
 
 
-UserRoute.get("/findUser/", controller.findUserByUuid);
+UserAuthRoute.post("/sing-up/", controller.registerUser);
 
-export default UserRoute;
+export default UserAuthRoute;
