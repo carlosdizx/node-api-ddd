@@ -1,11 +1,12 @@
 import { PersonRepository } from "../../models/person/PersonRepository";
 import { Person } from "../../models/person/Person";
-import { UserAuthUseCase } from "../user/UserAuthUseCase";
+import { UserAuthRepository } from "../../models/user/UserRepository";
+import { User } from "../../models/user/User";
 
 export class PersonUseCase {
   constructor(
     private readonly mainRepository: PersonRepository,
-    private readonly twoRepository: UserAuthUseCase
+    private readonly twoRepository: UserAuthRepository
   ) {}
 
   public createPerson = async ({
@@ -16,13 +17,14 @@ export class PersonUseCase {
     dateOfBirth,
     uuidUser,
   }) => {
+    const user: User = await this.twoRepository.findByUuid(uuidUser);
     const person: Person = new Person(
       firstName,
       lastName,
       typeDocument,
       document,
       dateOfBirth,
-      null
+      user
     );
     return await this.mainRepository.create(person);
   };
