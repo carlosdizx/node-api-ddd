@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { UserAuthUseCase } from "../../domain/usecase/user/UserAuthUseCase";
-import { UserData } from "../data/UserData";
-import {UserDataAdapter} from "../data/UserDataAdapter";
+import { UserData } from "../data/user/UserData";
+import {UserDataAdapter} from "../data/user/UserDataAdapter";
 import {UserController} from "../controller/user/UserController";
 
 const UserRoute = Router();

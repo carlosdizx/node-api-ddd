@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { UserData } from "../../infrastructure/data/UserData";
+import { UserData } from "../../infrastructure/data/user/UserData";
 
 export const PostgresSQLDataSource = new DataSource({
   type: "postgres",
