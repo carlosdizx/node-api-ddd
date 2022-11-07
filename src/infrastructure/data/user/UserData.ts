@@ -1,4 +1,5 @@
-import {Entity, Column, ObjectIdColumn} from "typeorm";
+import { Entity, Column, ObjectIdColumn, OneToMany } from "typeorm";
+import { PersonData } from "../person/PersonData";
 @Entity({ name: "users" })
 export class UserData {
   @ObjectIdColumn()
@@ -14,4 +15,6 @@ export class UserData {
   password: string;
   @Column()
   description: string;
+  @OneToMany(() => PersonData, (person) => person.user)
+  person: PersonData;
 }
