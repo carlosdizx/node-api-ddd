@@ -6,7 +6,6 @@ import { UserData } from "../user/UserData";
 export class PersonData {
   @ObjectIdColumn()
   id: number;
-
   @Column()
   uuid: string;
   @Column()

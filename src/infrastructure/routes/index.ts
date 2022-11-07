@@ -1,6 +1,6 @@
 import express from "express";
-import UserRoute from "./UserAuthRoute";
-import UserAuthRoute from "./UserRoute";
+import UserRoute from "./user/UserAuthRoute";
+import UserAuthRoute from "./user/UserRoute";
 
 export const initRoutes = (app: express.Express) => {
     app.use("/users", UserRoute);

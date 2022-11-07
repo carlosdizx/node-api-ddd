@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { UserAuthUseCase } from "../../domain/usecase/user/UserAuthUseCase";
-import { UserData } from "../data/user/UserData";
-import {UserDataAuthAdapter} from "../data/user/UserDataAuthAdapter";
-import {UserAuthController} from "../controller/user/UserAuthController";
+import { UserAuthUseCase } from "../../../domain/usecase/user/UserAuthUseCase";
+import { UserData } from "../../data/user/UserData";
+import {UserDataAuthAdapter} from "../../data/user/UserDataAuthAdapter";
+import {UserAuthController} from "../../controller/user/UserAuthController";
 
 const UserAuthRoute = Router();
 
