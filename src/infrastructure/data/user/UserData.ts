@@ -1,14 +1,7 @@
-import {
-  Entity,
-  Column,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  BeforeInsert,
-} from "typeorm";
+import { Entity, Column, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { PersonData } from "../person/PersonData";
 @Entity({ name: "users" })
 export class UserData {
-  @BeforeInsert()
   @PrimaryGeneratedColumn("uuid")
   uuid: string;
   @Column()
