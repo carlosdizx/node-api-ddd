@@ -1,6 +1,7 @@
 import { MongoDataSource } from "../../application/db/MongoConfig";
 import { CrudOperations } from "./common/CrudOperations";
 import { Repository } from "typeorm/repository/Repository";
+import { DataSource } from "typeorm";
 
 export class MongoRepository implements CrudOperations<string> {
   private readonly repository: Repository<any>;
@@ -29,5 +30,9 @@ export class MongoRepository implements CrudOperations<string> {
 
   async delete(uuid: string): Promise<void> {
     await this.repository.delete({ uuid });
+  }
+
+  dataSource(): DataSource {
+    return MongoDataSource;
   }
 }
