@@ -15,9 +15,9 @@ export class PersonUseCase {
     typeDocument,
     document,
     dateOfBirth,
-    uuidUser,
+    uuid,
   }) => {
-    const user: User = await this.twoRepository.findByUuid(uuidUser);
+    const user: User = await this.twoRepository.findByUuid(uuid);
     const person: Person = new Person(
       firstName,
       lastName,
