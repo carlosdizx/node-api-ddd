@@ -1,5 +1,6 @@
 import { PostgresSQLRepository } from "../../repository/PostgreSQLRepository";
 import { PersonRepository } from "../../../domain/models/person/PersonRepository";
+import { PersonData } from "./PersonData";
 
 export class PersonDataAdapter
   extends PostgresSQLRepository
@@ -10,6 +11,10 @@ export class PersonDataAdapter
   }
 
   async findAll(): Promise<any[]> {
-    return super.list();
+    return this.dataSource()
+      .getRepository(PersonData)
+      .createQueryBuilder("person")
+      .leftJoinAndSelect("person.user", "user")
+      .getMany();
   }
 }
