@@ -9,4 +9,5 @@ export const initRoutes = (app: express.Express) => {
   app.use("/users/auth", userAuthRoute);
   app.use("/persons/", personRoute);
   app.use("/roles/", roleRoute);
+  app.use("/user-role/", roleRoute);
 };
