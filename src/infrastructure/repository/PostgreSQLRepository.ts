@@ -14,7 +14,7 @@ export class PostgresSQLRepository implements CrudOperations<string> {
     return await this.repository.save(entity);
   }
 
-  async list(): Promise<any> {
+  async list(): Promise<any[]> {
     return await this.repository.find();
   }
 
