@@ -1,4 +1,4 @@
-import { Role } from "../common/Role";
+import { Role } from "../role/Role";
 
 export class User {
   private readonly email: string;
