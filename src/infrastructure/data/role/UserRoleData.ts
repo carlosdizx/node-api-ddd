@@ -1,13 +1,15 @@
-import { Entity, JoinColumn, ManyToOne } from "typeorm";
+import {Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import { RoleData } from "./RoleData";
 import { UserData } from "../user/UserData";
 
-@Entity({ name: "role_user" })
+@Entity({ name: "users_roles" })
 export class UserRoleData {
+  @PrimaryGeneratedColumn("uuid")
+  uuid: string;
   @ManyToOne(() => RoleData, (role) => role.userRole)
-  @JoinColumn()
+  @JoinColumn({name:"role_id"})
   role: RoleData;
   @ManyToOne(() => UserData, (user) => user.userRole)
-  @JoinColumn()
+  @JoinColumn({name:"user_id"})
   user: UserData;
 }
