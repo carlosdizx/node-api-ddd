@@ -1,4 +1,4 @@
-# Aplicación con NodeJS, Express, TypeScript, MongoDB, MySQL y PostgreSQL
+# Aplicación con NodeJS, Express, TypeScript, MongoDB, MySQL, PostgreSQL, Scheduler, Axios y RabbitMQ
 
 ### Aplicación orientada al negocio, Arquitectura por capas
 
@@ -41,6 +41,3 @@ DB_MYSQL_DATABASE=prueba
 ```sh
 npm run dev
 ```
-
-
-

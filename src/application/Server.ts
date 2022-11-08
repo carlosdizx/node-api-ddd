@@ -2,12 +2,9 @@ import "dotenv/config";
 import express from "express";
 import cors from "express";
 import dbMongoInit from "./db/MongoConfig";
-import { registerRouters } from "./routes";
-import dbMySQLInit from "./db/MySQLConfig";
-import dbPostgresSQLInit from "./db/PostgreSQLConfig";
+import { initRoutes } from "../infrastructure/routes";
 import initScheduler from "../infrastructure/scheduler";
 import initAMQP from "../infrastructure/reactive/rabbitmq";
-import allAxiosInit from "../infrastructure/http/axios";
 
 export class Server {
   private readonly port: string;
@@ -19,16 +16,13 @@ export class Server {
     this.app.use(cors());
     this.app.use(express.json());
     this.connectToDatabase().then();
-    registerRouters(this.app);
+    initRoutes(this.app);
     initScheduler().then();
     initAMQP().then();
-    allAxiosInit().then();
   }
 
   connectToDatabase = async () => {
     await dbMongoInit();
-    await dbMySQLInit();
-    await dbPostgresSQLInit();
   };
 
   listen = async (): Promise<void> => {
