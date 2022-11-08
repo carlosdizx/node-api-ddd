@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { UserData } from "../../infrastructure/data/user/UserData";
-import {PersonData} from "../../infrastructure/data/person/PersonData";
+import { PersonData } from "../../infrastructure/data/person/PersonData";
+import { RoleData } from "../../infrastructure/data/role/RoleData";
 
 export const PostgresSQLDataSource = new DataSource({
   type: "postgres",
@@ -9,7 +10,7 @@ export const PostgresSQLDataSource = new DataSource({
   username: process.env.DB_POSTGRES_USER,
   password: process.env.DB_POSTGRES_PASSWORD,
   database: process.env.DB_POSTGRES_DATABASE,
-  entities: [UserData, PersonData],
+  entities: [UserData, PersonData, RoleData],
 });
 
 const dbPostgresSQLInit = async () => {
