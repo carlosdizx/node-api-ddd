@@ -5,6 +5,7 @@ import { UserRoleRepository } from "../../models/role/UserRoleRepository";
 import { UserRole } from "../../models/role/UserRole";
 import { RoleRepository } from "../../models/role/RoleRepository";
 import { Role } from "../../models/role/Role";
+import { generatePassword } from "../../models/common/Util";
 
 export class UserAuthUseCase {
   constructor(
@@ -13,9 +14,9 @@ export class UserAuthUseCase {
     private readonly threeRepository: UserRoleRepository
   ) {}
 
-  public registerUser = async ({ email, password, description, roles }) => {
+  public registerUser = async ({ email, description, roles }) => {
     const salt = await bcrypt.genSalt(10);
-    const pass = await bcrypt.hash(password, salt);
+    const pass = await bcrypt.hash(generatePassword(10), salt);
     const user = new User(email, pass, description);
     const userSaved = await this.repository.register(user);
     for (const roleId of roles) {
