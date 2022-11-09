@@ -20,17 +20,16 @@ export const sendMailUserRegister = async (email: string) => {
     { encoding: "utf-8" }
   );
 
-  const readTemplate = new Promise(
-    async (resolve: Function, reject: Function) => {
-      await file.on("data", async (data) => {
-        if (typeof data === "string") {
-          template += data;
-          resolve(template);
-        }
-      });
-    }
-  );
-  const sendMail = new Promise(async (resolve: Function, reject: Function) => {
+  const readTemplate = new Promise(async (resolve: Function) => {
+    await file.on("data", async (data) => {
+      if (typeof data === "string") {
+        template += data;
+        template = template.replace(/{{email}}/gi, email);
+        resolve(template);
+      }
+    });
+  });
+  const sendMail = new Promise(async () => {
     setTimeout(async () => {
       const info = await transport.sendMail({
         from: `GCEU <${emailSender}>`,
