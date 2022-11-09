@@ -1,11 +1,11 @@
 import { Entity, Column, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { PersonData } from "../person/PersonData";
-import {UserRoleData} from "../role/UserRoleData";
+import { UserRoleData } from "../role/UserRoleData";
 @Entity({ name: "users" })
 export class UserData {
   @PrimaryGeneratedColumn("uuid")
   uuid: string;
-  @Column()
+  @Column({ unique: true })
   email: string;
   @Column()
   password: string;
