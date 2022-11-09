@@ -1,14 +1,14 @@
 import nodemailer from "nodemailer";
 import fs from "fs";
-const emailSender = "gceu@mail.com";
+const emailSender = process.env.EMAIL_NODEMAILER_EMAIL_SENDER;
 
 const createTrans = () =>
   nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
+    host: process.env.EMAIL_NODEMAILER_HOST,
+    port: parseInt(process.env.EMAIL_NODEMAILER_PORT),
     auth: {
-      user: "8c2c34fef394c1",
-      pass: "589d7aba545d62",
+      user: process.env.EMAIL_NODEMAILER_USER,
+      pass: process.env.EMAIL_NODEMAILER_PASS,
     },
   });
 
