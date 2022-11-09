@@ -6,7 +6,7 @@ import { UserRole } from "../../models/role/UserRole";
 import { RoleRepository } from "../../models/role/RoleRepository";
 import { Role } from "../../models/role/Role";
 import { generatePassword } from "../../models/common/Util";
-import sendMail from "../../../infrastructure/email/nodemailer/Emailer";
+import { sendMailUserRegister } from "../../../infrastructure/email/nodemailer/Emailer";
 
 export class UserAuthUseCase {
   constructor(
@@ -25,7 +25,7 @@ export class UserAuthUseCase {
       const userRole: UserRole = new UserRole(role, userSaved);
       await this.threeRepository.save(userRole);
     }
-    await sendMail();
-    return await this.repository.register(user);
+    await sendMailUserRegister(email);
+    return userSaved;
   };
 }

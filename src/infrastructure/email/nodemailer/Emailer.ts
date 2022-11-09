@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+const emailSender = "gceu@mail.com";
 
 const createTrans = () =>
   nodemailer.createTransport({
@@ -10,17 +11,15 @@ const createTrans = () =>
     },
   });
 
-const sendMail = async () => {
+export const sendMailUserRegister = async (email: string) => {
   const transport = createTrans();
   const info = await transport.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>',
-    to: "bar@example.com, baz@example.com",
-    subject: "Hello ✔",
-    text: "Hello world?",
-    html: "<b>Hello world?</b>",
+    from: `GCEU <${emailSender}>`,
+    to: email,
+    subject: "Bienvenido a GCEU",
+    text: "Es un gusto tenerte en nuestro equipo",
+    html: "<b>Hey que tal amigo?</b>" + "<br />" + "<h2>Hola bienvenido a GCEU</h2>",
   });
 
   console.log("Message sent: %s", info.messageId);
 };
-
-export default sendMail;
