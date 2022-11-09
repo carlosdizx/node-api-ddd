@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { UserEntity } from "../../infrastructure/data/UserEntity";
+import { UserData } from "../../infrastructure/data/user/UserData";
 
 export const MysqlDataSource = new DataSource({
   type: "mysql",
@@ -8,7 +8,7 @@ export const MysqlDataSource = new DataSource({
   username: process.env.DB_MYSQL_USER,
   password: process.env.DB_MYSQL_PASSWORD,
   database: process.env.DB_MYSQL_DATABASE,
-  entities: [UserEntity],
+  entities: [UserData],
 });
 
 const dbMySQLInit = async () => {

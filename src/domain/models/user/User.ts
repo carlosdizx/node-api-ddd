@@ -1,17 +1,22 @@
-import {v4 as uuid} from "uuid";
+import { Role } from "../role/Role";
 
 export class User {
-    uuid: string;
-    name: string;
-    email: string;
-    password: string;
-    description: string;
+  private readonly email: string;
+  private readonly password: string;
+  private readonly description: string;
+  private readonly roles: Role[];
+  private readonly status: boolean;
 
-    constructor(name: string, email: string, password: string, description?: string) {
-        this.uuid = uuid();
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.description = description ?? "default";
-    }
+  constructor(
+    email: string,
+    password: string,
+    roles: Role[],
+    description?: string
+  ) {
+    this.email = email;
+    this.password = password;
+    this.roles = roles;
+    this.description = description ?? "default";
+    this.status = true;
+  }
 }
